@@ -2,67 +2,95 @@
   {
     "id": 202301002,
     "description": "Maintenance serveur et infrastructure cloud - Janvier 2023 Modifé",
+    "client": "John Doe",
     "montantHT": 2000,
     "montantTTC": 4000
   },
   {
     "id": 202301003,
     "description": "Formation équipe développement - React.js avancé",
+    "client": "John Doe",
     "montantHT": 1200,
     "montantTTC": 1440
   },
   {
     "id": 202301004,
     "description": "Audit sécurité application web et corrections",
+    "client": "John Doe",
+    "prestations": "Audit, corrections, tests",
     "montantHT": 1800,
     "montantTTC": 2160
   },
   {
     "id": 202301005,
     "description": "Intégration API paiement et système de facturation",
+    "client": "John Doe",
+    "prestations": "Développement, intégration",
     "montantHT": 950,
     "montantTTC": 1140
   },
   {
     "id": 202301006,
     "description": "Conception et développement application mobile iOS/Android",
+    "client": "John Doe",
+    "prestations": "Développement, intégration",
     "montantHT": 4200,
     "montantTTC": 5040
   },
   {
     "id": 202301007,
     "description": "Optimisation SEO et performance site web",
+    "client": "John Doe",
+    "prestations": "Développement, intégration",
     "montantHT": 750,
     "montantTTC": 900
   },
   {
     "id": 202301008,
     "description": "Migration base de données et optimisation requêtes",
+    "client": "John Doe",
+    "prestations": "Développement, intégration",
     "montantHT": 1350,
     "montantTTC": 1620
   },
   {
     "id": 202301009,
     "description": "Support technique et hotline - Forfait mensuel",
+    "client": "John Doe",
+    "prestations": "Développement, intégration",
     "montantHT": 600,
     "montantTTC": 720
   },
   {
     "id": 202301010,
     "description": "Développement module CRM personnalisé",
+    "client": "John Doe",
+    "prestations": "Développement, intégration",
     "montantHT": 2800,
     "montantTTC": 3360
   },
   {
     "id": 202301011,
     "description": "Hébergement web professionnel - Abonnement annuel",
+    "client": "John Doe",
+    "prestations": "Développement, intégration",
     "montantHT": 480,
     "montantTTC": 576
   },
   {
+    "id": 498143880,
     "description": "Test Création Facture",
+    "client": "John Doe",
+    "prestations": "Développement, intégration",
     "montantHT": 350,
-    "montantTTC": 450,
-    "id": 498143880
+    "montantTTC": 450
+  },
+  {
+    "description": "Test Facture",
+    "client": "Pierre Dupont",
+    "prestation": "Dev",
+    "montantHT": 12033,
+    "montantTTC": 213133,
+    "id": 245378816
   }
 ]

@@ -11,7 +11,7 @@
           
           <div class="card-body">
             <form @submit.prevent="createFacture">
-            
+          
               <div class="mb-3">
                 <label for="description" class="form-label">Description *</label>
                 <textarea
@@ -24,7 +24,48 @@
                 ></textarea>
               </div>
 
-       
+            
+              <div class="mb-3">
+                <label for="client" class="form-label">Client *</label>
+                <select
+                  id="client"
+                  v-model="client"
+                  class="form-select"
+                  required
+                >
+                  <option value="">-- Sélectionner un client --</option>
+                  <option value="John Doe">John Doe</option>
+                  <option value="Jane Smith">Jane Smith</option>
+                  <option value="Pierre Dupont">Pierre Dupont</option>
+                  <option value="Marie Martin">Marie Martin</option>
+                  <option value="David Johnson">David Johnson</option>
+                  <option value="Sophie Dubois">Sophie Dubois</option>
+                  <option value="Michael Brown">Michael Brown</option>
+                  <option value="Camille Leroy">Camille Leroy</option>
+                  <option value="Robert Wilson">Robert Wilson</option>
+                  <option value="Julie Moreau">Julie Moreau</option>
+                  <option value="Thomas Garcia">Thomas Garcia</option>
+                  <option value="Laura Petit">Laura Petit</option>
+                  <option value="Alexandre Bernard">Alexandre Bernard</option>
+                  <option value="Emma Rousseau">Emma Rousseau</option>
+                  <option value="Lucas Roux">Lucas Roux</option>
+                </select>
+              </div>
+
+         
+              <div class="mb-3">
+                <label for="prestation" class="form-label">prestation *</label>
+                <input
+                  id="prestation"
+                  v-model="prestation"
+                  type="text"
+                  class="form-control"
+                  placeholder="Types de prestation (ex: Développement Web, Formation...)"
+                  required
+                />
+              </div>
+
+              
               <div class="mb-3">
                 <label for="montantHT" class="form-label">Montant HT *</label>
                 <div class="input-group">
@@ -42,7 +83,7 @@
                 </div>
               </div>
 
-        
+      
               <div class="mb-3">
                 <label for="montantTTC" class="form-label">Montant TTC *</label>
                 <div class="input-group">
@@ -60,7 +101,7 @@
                 </div>
               </div>
 
-           
+   
               <div class="d-flex gap-2 justify-content-end">
                 <button 
                   type="button" 
@@ -94,16 +135,17 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useFactureStore } from '@/stores/Facture'
+import { useFactureStore } from '@/stores/facture'
 
 const router = useRouter()
 const factureStore = useFactureStore()
 
 const description = ref('')
+const client = ref('')
+const prestation = ref('')  
 const montantHT = ref(0)
 const montantTTC = ref(0)
 const loading = ref(false)
-
 
 const createFacture = async () => {
   loading.value = true
@@ -111,6 +153,8 @@ const createFacture = async () => {
   try {
     await factureStore.createFacture({
       description: description.value.trim(),
+      client: client.value,
+      prestation: prestation.value.trim(), 
       montantHT: montantHT.value,
       montantTTC: montantTTC.value
     })
@@ -133,7 +177,8 @@ const createFacture = async () => {
   border-radius: 15px 15px 0 0 !important;
 }
 
-.form-control:focus {
+.form-control:focus,
+.form-select:focus {
   border-color: #198754;
   box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
 }

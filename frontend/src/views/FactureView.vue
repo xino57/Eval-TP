@@ -12,7 +12,7 @@
           </button>
         </div>
 
-        <!-- Tableau des factures -->
+        
         <div class="card shadow-sm" v-if="factures && factures.length > 0">
           <div class="card-header bg-primary text-white">
             <h5 class="mb-0">
@@ -27,13 +27,16 @@
                     <th scope="col" class="text-center">#</th>
                     <th scope="col">ID Facture</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Prestation</th> 
                     <th scope="col" class="text-end">Montant HT</th>
                     <th scope="col" class="text-end">Montant TTC</th>
                     <th scope="col" class="text-center">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(facture, index) in factures" :key="getFactureProperty(facture, 'id')" class="align-middle">
+                  <tr v-for="(facture, index) in factures" :key="getFactureProperty(facture, 'id')"
+                    class="align-middle">
                     <td class="text-center fw-bold text-muted">{{ index + 1 }}</td>
                     <td>
                       <span class="badge bg-secondary fs-6">{{ getFactureProperty(facture, 'id') }}</span>
@@ -42,7 +45,27 @@
                       <div class="d-flex align-items-center">
                         <i class="fas fa-file-invoice text-primary me-2"></i>
                         <div>
-                          <div class="fw-semibold">{{ getFactureProperty(facture, 'description') || 'Sans description' }}</div>
+                          <div class="fw-semibold">{{ getFactureProperty(facture, 'description') || 'Sans description'
+                            }}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <i class="fas fa-user text-primary me-2"></i>
+                        <div>
+                          <div class="fw-semibold">{{ getFactureProperty(facture, 'client') || 'Sans client' }}</div>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <i class="fas fa-briefcase text-success me-2"></i>
+                        <div>
+                          <span class="badge bg-warning-soft text-warning fs-6">
+                            {{ getFactureProperty(facture, 'prestation') || 'Non définie' }}
+                          </span>
                         </div>
                       </div>
                     </td>
@@ -58,13 +81,13 @@
                     </td>
                     <td class="text-center">
                       <div class="d-flex gap-2 justify-content-center">
-                        <button @click="goToEditFacture(getFactureProperty(facture, 'id'))" class="btn btn-outline-secondary btn-sm"
-                          title="Modifier">
+                        <button @click="goToEditFacture(getFactureProperty(facture, 'id'))"
+                          class="btn btn-outline-secondary btn-sm" title="Modifier">
                           Modifier
                         </button>
 
-                        <button @click="onDeleteFacture(getFactureProperty(facture, 'id'))" class="btn btn-outline-danger btn-sm"
-                          title="Supprimer">
+                        <button @click="onDeleteFacture(getFactureProperty(facture, 'id'))"
+                          class="btn btn-outline-danger btn-sm" title="Supprimer">
                           Supprimer
                         </button>
                       </div>
@@ -182,6 +205,10 @@ onBeforeMount(async () => {
 
 .bg-info-soft {
   background-color: rgba(13, 202, 240, 0.1) !important;
+}
+
+.bg-warning-soft {
+  background-color: rgba(255, 193, 7, 0.1) !important;
 }
 
 .btn-group .btn {

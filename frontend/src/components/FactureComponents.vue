@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-// récupération des données passées au composant
+
 const props = defineProps({
   facture: {
     type: Object,
@@ -54,10 +54,9 @@ const props = defineProps({
   },
 })
 
-// événement pour avertir le parent de la suppression
+
 const emit = defineEmits(['delete'])
 
-// fonction pour formater les prix
 const formatPrice = (price) => {
   if (!price) return '0,00 €'
   return new Intl.NumberFormat('fr-FR', {
