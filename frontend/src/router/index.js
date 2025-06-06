@@ -15,15 +15,14 @@ const router = createRouter({
       component: () => import('../views/FactureView.vue'),
     },
     {
-      path: '/facture/:id',
-      name: 'facture',
-      props: true,
-      component: () => import('../views/FactureDetailView.vue'),
+      path: '/facture/new',
+      name: 'facture-new',
+      component: () => import('../views/NewFacturelView.vue'),
     },
     {
-      props: true,
       path: '/facture/edit/:id',
       name: 'facture-edit',
+      props: true,
       component: () => import('../views/FactureEditView.vue'),
     }
   ],

@@ -112,9 +112,7 @@ const { factures, error } = storeToRefs(factureStore)
 const { getAllFactures, deleteFacture } = factureStore
 const router = useRouter()
 
-// Fonction pour accéder aux propriétés des factures via l'interface
 const getFactureProperty = (facture, property) => {
-  // Vérifier que la propriété existe dans l'interface
   if (property in factureInterface) {
     return facture[property] || factureInterface[property]
   }
@@ -122,22 +120,10 @@ const getFactureProperty = (facture, property) => {
   return facture[property]
 }
 
-// Fonction pour créer une nouvelle facture basée sur l'interface
-const createNewFactureFromInterface = () => {
-  return { ...factureInterface }
-}
-
-// Fonction pour valider qu'une facture respecte l'interface
-const validateFactureInterface = (facture) => {
-  const requiredProperties = Object.keys(factureInterface)
-  return requiredProperties.every(property => property in facture)
-}
-
 const goToNewFacture = () => {
   router.push('/facture/new')
 }
 
-// Naviguer vers l'édition d'une facture
 const goToEditFacture = (factureId) => {
   router.push(`/facture/edit/${factureId}`)
 }
@@ -162,16 +148,8 @@ const onDeleteFacture = async (factureId) => {
 
 onBeforeMount(async () => {
   await getAllFactures()
-  
-  // Optionnel : Valider que toutes les factures respectent l'interface
-  if (factures.value) {
-    factures.value.forEach((facture, index) => {
-      if (!validateFactureInterface(facture)) {
-        console.warn(`Facture ${index} ne respecte pas l'interface:`, facture)
-      }
-    })
-  }
 })
+
 </script>
 
 <style scoped>

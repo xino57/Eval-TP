@@ -99,13 +99,12 @@ import { useFactureStore } from '@/stores/Facture'
 const router = useRouter()
 const factureStore = useFactureStore()
 
-// Données du formulaire
 const description = ref('')
 const montantHT = ref(0)
 const montantTTC = ref(0)
 const loading = ref(false)
 
-// Créer la facture
+
 const createFacture = async () => {
   loading.value = true
   
@@ -116,7 +115,6 @@ const createFacture = async () => {
       montantTTC: montantTTC.value
     })
     
-    // Redirection vers la liste
     router.push('/factures')
   } catch (error) {
     alert('Erreur lors de la création: ' + error.message)
