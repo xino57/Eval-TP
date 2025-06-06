@@ -12,7 +12,7 @@
           </button>
         </div>
 
-        
+        <!-- Tableau des factures -->
         <div class="card shadow-sm" v-if="factures && factures.length > 0">
           <div class="card-header bg-primary text-white">
             <h5 class="mb-0">
@@ -33,54 +33,43 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(facture, index) in factures" :key="facture.id" class="align-middle">
+                  <tr v-for="(facture, index) in factures" :key="getFactureProperty(facture, 'id')" class="align-middle">
                     <td class="text-center fw-bold text-muted">{{ index + 1 }}</td>
                     <td>
-                      <span class="badge bg-secondary fs-6">{{ facture.id }}</span>
+                      <span class="badge bg-secondary fs-6">{{ getFactureProperty(facture, 'id') }}</span>
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
                         <i class="fas fa-file-invoice text-primary me-2"></i>
                         <div>
-                          <div class="fw-semibold">{{ facture.description || 'Sans description' }}</div>
+                          <div class="fw-semibold">{{ getFactureProperty(facture, 'description') || 'Sans description' }}</div>
                         </div>
                       </div>
                     </td>
                     <td class="text-end">
                       <span class="badge bg-success-soft text-success fs-6">
-                        {{ formatPrice(facture.montantHT) }}
+                        {{ formatPrice(getFactureProperty(facture, 'montantHT')) }}
                       </span>
                     </td>
                     <td class="text-end">
                       <span class="badge bg-info-soft text-info fs-6">
-                        {{ formatPrice(facture.montantTTC) }}
+                        {{ formatPrice(getFactureProperty(facture, 'montantTTC')) }}
                       </span>
                     </td>
                     <td class="text-center">
-                      <div class="btn-group" role="group">
-                        <router-link 
-                          :to="`/facture/${facture.id}`" 
-                          class="btn btn-outline-primary btn-sm"
-                          title="Voir détail"
-                        >
-                          <i class="fas fa-eye"></i>
-                        </router-link>
-                        <router-link 
-                          :to="`/facture/edit/${facture.id}`" 
-                          class="btn btn-outline-secondary btn-sm"
-                          title="Modifier"
-                        >
-                          <i class="fas fa-edit"></i>
-                        </router-link>
-                        <button 
-                          @click="onDeleteFacture(facture.id)" 
-                          class="btn btn-outline-danger btn-sm"
-                          title="Supprimer"
-                        >
-                          <i class="fas fa-trash"></i>
+                      <div class="d-flex gap-2 justify-content-center">
+                        <button @click="goToEditFacture(getFactureProperty(facture, 'id'))" class="btn btn-outline-secondary btn-sm"
+                          title="Modifier">
+                          Modifier
+                        </button>
+
+                        <button @click="onDeleteFacture(getFactureProperty(facture, 'id'))" class="btn btn-outline-danger btn-sm"
+                          title="Supprimer">
+                          Supprimer
                         </button>
                       </div>
                     </td>
+
                   </tr>
                 </tbody>
               </table>
@@ -100,7 +89,7 @@
               <i class="fas fa-file-invoice fa-4x text-muted mb-3"></i>
               <h3 class="text-muted">Aucune facture</h3>
               <p class="text-muted mb-4">Vous n'avez pas encore créé de facture.</p>
-              <button class="btn btn-primary btn-lg" @click="$router.push('/facture/new')">
+              <button class="btn btn-primary btn-lg" @click="goToNewFacture">
                 <i class="fas fa-plus me-2"></i>Créer ma première facture
               </button>
             </div>
@@ -115,12 +104,43 @@
 import { useFactureStore } from '@/stores/facture'
 import { storeToRefs } from 'pinia'
 import { onBeforeMount } from 'vue'
-
+import { useRouter } from 'vue-router'
+import { factureInterface } from '@/interfaces/facture'
 
 const factureStore = useFactureStore()
 const { factures, error } = storeToRefs(factureStore)
 const { getAllFactures, deleteFacture } = factureStore
+const router = useRouter()
 
+// Fonction pour accéder aux propriétés des factures via l'interface
+const getFactureProperty = (facture, property) => {
+  // Vérifier que la propriété existe dans l'interface
+  if (property in factureInterface) {
+    return facture[property] || factureInterface[property]
+  }
+  console.warn(`Propriété ${property} non définie dans l'interface facture`)
+  return facture[property]
+}
+
+// Fonction pour créer une nouvelle facture basée sur l'interface
+const createNewFactureFromInterface = () => {
+  return { ...factureInterface }
+}
+
+// Fonction pour valider qu'une facture respecte l'interface
+const validateFactureInterface = (facture) => {
+  const requiredProperties = Object.keys(factureInterface)
+  return requiredProperties.every(property => property in facture)
+}
+
+const goToNewFacture = () => {
+  router.push('/facture/new')
+}
+
+// Naviguer vers l'édition d'une facture
+const goToEditFacture = (factureId) => {
+  router.push(`/facture/edit/${factureId}`)
+}
 
 const formatPrice = (price) => {
   if (!price) return '0,00 €'
@@ -142,8 +162,16 @@ const onDeleteFacture = async (factureId) => {
 
 onBeforeMount(async () => {
   await getAllFactures()
+  
+  // Optionnel : Valider que toutes les factures respectent l'interface
+  if (factures.value) {
+    factures.value.forEach((facture, index) => {
+      if (!validateFactureInterface(facture)) {
+        console.warn(`Facture ${index} ne respecte pas l'interface:`, facture)
+      }
+    })
+  }
 })
-
 </script>
 
 <style scoped>
@@ -153,7 +181,7 @@ onBeforeMount(async () => {
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
 }
 
 .display-6 {

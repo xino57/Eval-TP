@@ -1,9 +1,8 @@
-const gameInterface = {
+const factureInterface = {
   id: '',
-  titre: '',
-  genre: '',
-  plateform: '',
-  note:'',
+  description: '',
+  montantHT: 0,
+  montantTTC: 0,
 }
 
-export { gameInterface }
+export { factureInterface }

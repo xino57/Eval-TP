@@ -2,7 +2,7 @@
   <header>
     <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><i class="fa-solid fa-file-invoice me-2"></i>FactureMaster</a>
+        <a class="navbar-brand" href="#"><i class="fa-solid fa-file-invoice me-2"></i>Factures</a>
         <button
           class="navbar-toggler"
           type="button"
