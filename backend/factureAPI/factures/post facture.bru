@@ -1,0 +1,15 @@
+meta {
+  name: post facture
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{url}}/factures
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {"description":"TEst Création Facture","montantHT":3500.00,"montantTTC":4200.00}
+}

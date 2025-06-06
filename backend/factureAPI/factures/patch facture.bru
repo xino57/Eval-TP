@@ -1,0 +1,15 @@
+meta {
+  name: patch facture
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{url}}/factures/202301001
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {"description":"Prestation de développement web - Site vitrine e-commerce MODIFIÉ","montantHT":2800.00,"montantTTC":3360.00}
+}
