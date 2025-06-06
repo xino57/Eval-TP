@@ -2,7 +2,7 @@
   <header>
     <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><i class="fa-solid fa-home me-2"></i>GameMaster</a>
+        <a class="navbar-brand" href="#"><i class="fa-solid fa-file-invoice me-2"></i>FactureMaster</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -18,12 +18,12 @@
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
               <RouterLink activeClass="active" to="/" class="nav-link"
-                ><i class="fas fa-gamepad me-2"></i>Games</RouterLink
+                ><i class="fas fa-home me-2"></i>Accueil</RouterLink
               >
             </li>
             <li class="nav-item">
-              <RouterLink activeClass="active" to="/profile" class="nav-link"
-                ><i class="fas fa-user me-2"></i>Profil</RouterLink
+              <RouterLink activeClass="active" to="/factures" class="nav-link"
+                ><i class="fas fa-file-invoice-dollar me-2"></i>Factures</RouterLink
               >
             </li>
           </ul>

@@ -1,33 +1,30 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import GamesView from '../views/GamesView.vue'
+import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'games',
-      component: GamesView,
+      name: 'home',
+      component: HomeView,
     },
     {
-      path: '/game/:id',
-      name: 'game',
+      path: '/factures',
+      name: 'factures',
+      component: () => import('../views/FactureView.vue'),
+    },
+    {
+      path: '/facture/:id',
+      name: 'facture',
       props: true,
-      component: () => import('../views/GameDetailView.vue'),
-    },
-    {
-      path: '/profile',
-      name: 'profile',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/ProfileView.vue'),
+      component: () => import('../views/FactureDetailView.vue'),
     },
     {
       props: true,
-      path: '/game/edit/:id',
-      name: 'game-edit',
-      component: () => import('../views/GameEditView.vue'),
+      path: '/facture/edit/:id',
+      name: 'facture-edit',
+      component: () => import('../views/FactureEditView.vue'),
     }
   ],
 })
